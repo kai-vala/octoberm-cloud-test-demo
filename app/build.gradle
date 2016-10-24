@@ -1,0 +1,110 @@
+
+apply plugin: 'com.android.application'
+apply plugin: 'devicefarm'
+apply plugin: 'testdroid'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.2"
+    defaultConfig {
+        applicationId "com.octoberm.cloudtestdemo"
+        testApplicationId 'com.octoberm.cloudtestdemo.test'
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'org.apache.httpcomponents:httpclient:4.5.2'
+
+    /**
+     * Android Test dependencies
+     */
+    androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
+    androidTestCompile "com.android.support:support-annotations:24.2.1"
+    // Additional Espresso test dependencies imports (IntentsTestRule)
+    androidTestCompile(
+            "com.android.support.test.espresso:espresso-intents:2.2.2") {
+        // Necessary to avoid version conflicts
+        exclude group: 'com.android.support', module: 'support-annotations'
+    }
+
+    // Provides Recycler view actions etc.
+    androidTestCompile(
+            "com.android.support.test.espresso:espresso-contrib:2.2.2") {
+        exclude group: 'com.android.support', module: 'appcompat-v7'
+        exclude group: 'com.android.support', module: 'support-v4'
+        exclude group: 'com.android.support', module: 'design'
+        exclude module: 'recyclerview-v7'
+    }
+
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    testCompile 'junit:junit:4.12'
+}
+
+devicefarm {
+
+    projectName "CloudDemo" // required: Must already exists.
+
+    devicePool "Devices1" // optional: Defaults to "Top Devices"
+
+    //useUnmeteredDevices() // optional if you wish to use your un-metered devices
+
+    authentication {
+        accessKey "access"
+        secretKey "secret"
+    }
+
+    // optional block, radios default to 'on' state, all parameters optional
+    devicestate {
+
+        /*
+        extraDataZipFile file("path/to/zip") // or ‘null’ if you have no extra data. Default is null.
+        auxiliaryApps files(file("path/to/app"), file("path/to/app2")) // or ‘files()’ if you have no auxiliary apps. Default is an empty list.
+        */
+        wifi "on"
+        bluetooth "off"
+        gps "on"
+        nfc "off"
+        latitude 60.1653464
+        longitude 24.94292561
+    }
+
+    // Instrumentation
+    // See AWS Developer docs for filter (optional)
+    // instrumentation { filter "my-filter" }
+}
+
+testdroid {
+    username 'user'
+    password 'pw'
+    deviceGroup 'Devices1'
+
+    cloudUrl = 'https://cloud.testdroid.com'         // Optional - Used for PrivateCloud configs
+    projectName "CloudDemo"                          // Optional - Default: create a new project
+    mode "FULL_RUN"                                  // FULL_RUN / APP_CRAWLER / UI_AUTOMATOR
+
+    if (project.hasProperty('argTestRunName')) {
+        testRunName = project.property('argTestRunName')            // Optional - default: build variant name
+    }
+
+    scheduler "SINGLE"                      // Optional - PARALLEL or SERIAL default: PARALLEL
+
+    // Optional - Custom settings for test execution
+    fullRunConfig {
+        instrumentationRunner =  "android.support.test.runner.AndroidJUnitRunner"
+        limitationType = "PACKAGE"
+        limitationValue = "com.octoberm.cloudtestdemo.test.testcases"
+    }
+}
