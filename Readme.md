@@ -61,6 +61,8 @@ https://github.com/awslabs/aws-device-farm-gradle-plugin
 
  - Set your current gcloud project to your project ID:
 
+    gcloud beta projects list
+
 	gcloud config set project <YOUR-PROJECT-ID>
 
  - Make sure your authentication credentials are current:
