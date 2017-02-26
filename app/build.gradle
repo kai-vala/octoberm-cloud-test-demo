@@ -4,13 +4,13 @@ apply plugin: 'devicefarm'
 apply plugin: 'testdroid'
 
 android {
-    compileSdkVersion 24
-    buildToolsVersion "24.0.2"
+    compileSdkVersion 25
+    buildToolsVersion '25.0.2'
     defaultConfig {
         applicationId "com.octoberm.cloudtestdemo"
         testApplicationId 'com.octoberm.cloudtestdemo.test'
         minSdkVersion 15
-        targetSdkVersion 24
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
@@ -31,7 +31,7 @@ dependencies {
      * Android Test dependencies
      */
     androidTestCompile "com.android.support.test.espresso:espresso-core:2.2.2"
-    androidTestCompile "com.android.support:support-annotations:24.2.1"
+    androidTestCompile "com.android.support:support-annotations:25.2.0"
     // Additional Espresso test dependencies imports (IntentsTestRule)
     androidTestCompile(
             "com.android.support.test.espresso:espresso-intents:2.2.2") {
@@ -48,8 +48,8 @@ dependencies {
         exclude module: 'recyclerview-v7'
     }
 
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support:design:25.2.0'
     testCompile 'junit:junit:4.12'
 }
 
