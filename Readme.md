@@ -74,7 +74,7 @@ Used via [TestDroid Gradle plugin](https://github.com/bitbar/testdroid-gradle-pl
 - Create a device group (Note that the default groups might not work)
 - Configure Gradle plugin based on the created settings (API Key, project, device group etc).
 
-2) AWS Device Farm (Amazon)
+## AWS Device Farm (Amazon)
 
 Used via [AWS Device Farm Gradle Plugin](https://github.com/awslabs/aws-device-farm-gradle-plugin)
 
@@ -109,11 +109,11 @@ future.
 - Finally configure Gradle plugin based on the created settings (access key, secret key, project, 
 device group etc).
     
-3) Firebase Test Lab for Android (Google)
+## Firebase Test Lab for Android (Google)
 
 Used via the [gcloud command-line client](https://firebase.google.com/docs/test-lab/command-line)
 
-- Billing needs to be enabled. A Firebase "Blaze" plan is required to use the Test Lab.
+- Free to try with the new [15 tests/day option](https://firebase.google.com/pricing/)
 - If not present, install the Google Cloud SDK on your local system.
 - Make sure your Cloud SDK installation is up to date and includes the gcloud beta commands:
 
@@ -145,7 +145,6 @@ Good:
 
 Bad:
 
-- You have to pay to try it (although its cheap)
 - No CPU usage (?)
 - No memory usage (?)
 - Extremely low number of different devices and API levels available
