@@ -114,7 +114,7 @@ device group etc).
 Used via the [gcloud command-line client](https://firebase.google.com/docs/test-lab/command-line)
 
 - Free to try with the new [15 tests/day option](https://firebase.google.com/pricing/)
-- If not present, install the Google Cloud SDK on your local system.
+- If not present, install the [Google Cloud SDK](https://cloud.google.com/sdk/) on your local system.
 - Make sure your Cloud SDK installation is up to date and includes the gcloud beta commands:
 
     gcloud components update beta
